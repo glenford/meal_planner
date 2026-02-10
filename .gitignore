@@ -5,6 +5,8 @@
 !*.xcworkspace/contents.xcworkspacedata
 *.xcworkspace/*
 !*.xcworkspace/xcshareddata/
+!*.xcworkspace/xcshareddata/swiftpm/
+!*.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 # Build
 build/
@@ -16,7 +18,8 @@ DerivedData/
 # Swift Package Manager
 .swiftpm/
 Packages/
-Package.resolved
+# Package.resolved - Keep the one in xcshareddata for Xcode Cloud
+# Package.resolved
 
 # CocoaPods
 Pods/
