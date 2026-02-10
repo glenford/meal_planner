@@ -109,14 +109,14 @@
 				F124E5C32F3A33B8009C5891 /* MealFormViewModel.swift */,
 				F124E5C42F3A33B8009C5891 /* MealListViewModel.swift */,
 				F124E5C52F3A33B9009C5891 /* WeeklyPlannerViewModel.swift */,
-				A4000001000000000000001 /* MyApp */,
+				A4000001000000000000001 /* MealPlanner */,
 				A400000A000000000000001 /* MealPlannerTests */,
 				F124E5B82F395542009C5891 /* Frameworks */,
 				A4000002000000000000001 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A4000001000000000000001 /* MyApp */ = {
+		A4000001000000000000001 /* MealPlanner */ = {
 			isa = PBXGroup;
 			children = (
 				A2000001000000000000001 /* MealPlannerApp.swift */,
@@ -265,9 +265,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A5000001000000000000001 /* MyApp */ = {
+		A5000001000000000000001 /* MealPlanner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6000001000000000000001 /* Build configuration list for PBXNativeTarget "MyApp" */;
+			buildConfigurationList = A6000001000000000000001 /* Build configuration list for PBXNativeTarget "MealPlanner" */;
 			buildPhases = (
 				A7000001000000000000001 /* Sources */,
 				A3000001000000000000001 /* Frameworks */,
@@ -315,7 +315,8 @@
 					};
 				};
 			};
-			buildConfigurationList = A6000002000000000000001 /* Build configuration list for PBXProject "MyApp" */;
+			automaticallyResolvePackageDependencies = 1;
+			buildConfigurationList = A6000002000000000000001 /* Build configuration list for PBXProject "MealPlanner" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -331,7 +332,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A5000001000000000000001 /* MyApp */,
+				A5000001000000000000001 /* MealPlanner */,
 				A5000002000000000000001 /* MealPlannerTests */,
 			);
 		};
@@ -402,7 +403,7 @@
 /* Begin PBXTargetDependency section */
 		AB000002000000000000001 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A5000001000000000000001 /* MyApp */;
+			target = A5000001000000000000001 /* MealPlanner */;
 			targetProxy = AB000001000000000000001 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -539,6 +540,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Simple Meal Planner";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -549,7 +551,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.MealPlanner;
+				PRODUCT_BUNDLE_IDENTIFIER = net.usersource.MealPlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -567,6 +569,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Simple Meal Planner";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -577,7 +580,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.MealPlanner;
+				PRODUCT_BUNDLE_IDENTIFIER = net.usersource.MealPlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -596,7 +599,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.MealPlannerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = net.usersource.MealPlannerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -614,7 +617,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.MealPlannerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = net.usersource.MealPlannerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -626,7 +629,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A6000001000000000000001 /* Build configuration list for PBXNativeTarget "MyApp" */ = {
+		A6000001000000000000001 /* Build configuration list for PBXNativeTarget "MealPlanner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA000003000000000000001 /* Debug */,
@@ -635,7 +638,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6000002000000000000001 /* Build configuration list for PBXProject "MyApp" */ = {
+		A6000002000000000000001 /* Build configuration list for PBXProject "MealPlanner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA000001000000000000001 /* Debug */,
