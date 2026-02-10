@@ -64,6 +64,16 @@ class MealFormViewModel: ObservableObject {
         otherComponents.remove(at: index)
     }
     
+    /// Clear all form fields to prepare for entering a new meal
+    func clearForm() {
+        description = ""
+        primaryProtein = ""
+        primaryCarb = ""
+        otherComponents = []
+        newComponent = ""
+        errorMessage = nil
+    }
+    
     /// Save the meal with current form data
     /// Validates that description is not empty, then creates and persists the meal
     /// Calls onSaveComplete callback on success
@@ -88,6 +98,10 @@ class MealFormViewModel: ObservableObject {
         do {
             // Persist meal immediately (Requirement 1.3)
             try mealRepository.saveMeal(meal)
+            
+            // Clear form for next entry
+            clearForm()
+            
             onSaveComplete?()
         } catch {
             // Handle storage errors (Requirement 1.5)
