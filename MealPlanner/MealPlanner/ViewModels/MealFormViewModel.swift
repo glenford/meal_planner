@@ -31,6 +31,11 @@ class MealFormViewModel: ObservableObject {
     /// Error message to display to the user, if any
     @Published var errorMessage: String?
     
+    // MARK: - Private Properties
+    
+    /// The meal being edited, if any
+    private var editingMeal: Meal?
+    
     // MARK: - Dependencies
     
     private let mealRepository: MealRepositoryProtocol
@@ -41,9 +46,27 @@ class MealFormViewModel: ObservableObject {
     // MARK: - Initialization
     
     /// Initialize the view model with a meal repository
-    /// - Parameter mealRepository: The repository to use for meal persistence (defaults to MealRepository())
-    init(mealRepository: MealRepositoryProtocol = MealRepository()) {
+    /// - Parameters:
+    ///   - mealRepository: The repository to use for meal persistence (defaults to MealRepository())
+    ///   - meal: Optional meal to edit (if nil, creates a new meal)
+    init(mealRepository: MealRepositoryProtocol = MealRepository(), meal: Meal? = nil) {
         self.mealRepository = mealRepository
+        self.editingMeal = meal
+        
+        // Populate form fields if editing
+        if let meal = meal {
+            self.description = meal.description
+            self.primaryProtein = meal.primaryProtein
+            self.primaryCarb = meal.primaryCarb
+            self.otherComponents = meal.otherComponents
+        }
+    }
+    
+    // MARK: - Computed Properties
+    
+    /// Whether the form is in edit mode
+    var isEditing: Bool {
+        editingMeal != nil
     }
     
     // MARK: - Public Methods
@@ -75,7 +98,7 @@ class MealFormViewModel: ObservableObject {
     }
     
     /// Save the meal with current form data
-    /// Validates that description is not empty, then creates and persists the meal
+    /// Validates that description is not empty, then creates or updates the meal
     /// Calls onSaveComplete callback on success
     func saveMeal() {
         errorMessage = nil
@@ -87,20 +110,24 @@ class MealFormViewModel: ObservableObject {
             return
         }
         
-        // Create meal with current form data (Requirements 1.1, 1.2)
+        // Create or update meal with current form data (Requirements 1.1, 1.2)
         let meal = Meal(
+            id: editingMeal?.id ?? UUID(),
             description: trimmedDescription,
             primaryProtein: primaryProtein,
             primaryCarb: primaryCarb,
-            otherComponents: otherComponents
+            otherComponents: otherComponents,
+            createdAt: editingMeal?.createdAt ?? Date()
         )
         
         do {
             // Persist meal immediately (Requirement 1.3)
             try mealRepository.saveMeal(meal)
             
-            // Clear form for next entry
-            clearForm()
+            // Clear form for next entry (only if creating new)
+            if !isEditing {
+                clearForm()
+            }
             
             onSaveComplete?()
         } catch {

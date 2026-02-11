@@ -13,6 +13,7 @@ struct MealListView: View {
     @ObservedObject var viewModel: MealListViewModel
     @ObservedObject var plannerViewModel: WeeklyPlannerViewModel
     @State private var showingAddMeal = false
+    @State private var mealToEdit: Meal?
     
     /// Initialize with view models
     /// - Parameters:
@@ -56,6 +57,16 @@ struct MealListView: View {
                     // Reload meals when a new meal is saved
                     viewModel.loadMeals()
                 })
+            }
+            .sheet(item: $mealToEdit) { meal in
+                MealFormView(
+                    viewModel: MealFormViewModel(meal: meal),
+                    onMealSaved: {
+                        // Reload meals when a meal is edited
+                        viewModel.loadMeals()
+                        plannerViewModel.loadWeek()
+                    }
+                )
             }
             .onAppear {
                 viewModel.loadMeals()
@@ -139,6 +150,10 @@ struct MealListView: View {
             // Show unassigned meals first
             ForEach(unassignedMeals) { meal in
                 MealRow(meal: meal, isAssigned: false)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        mealToEdit = meal
+                    }
             }
             .onDelete { indexSet in
                 for index in indexSet {
@@ -149,6 +164,10 @@ struct MealListView: View {
             // Show assigned meals at the end with special styling
             ForEach(assignedMeals) { meal in
                 MealRow(meal: meal, isAssigned: true)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        mealToEdit = meal
+                    }
             }
             .onDelete { indexSet in
                 for index in indexSet {

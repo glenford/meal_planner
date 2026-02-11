@@ -87,7 +87,7 @@ struct MealFormView: View {
                     }
                 }
             }
-            .navigationTitle("Add Meal")
+            .navigationTitle(viewModel.isEditing ? "Edit Meal" : "Add Meal")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
