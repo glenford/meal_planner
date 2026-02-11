@@ -14,15 +14,19 @@ struct MealFormView: View {
     @Environment(\.dismiss) private var dismiss
     
     private let onMealSaved: (() -> Void)?
+    private let onCancel: (() -> Void)?
     
-    /// Initialize with a view model and optional callback
+    /// Initialize with a view model and optional callbacks
     /// - Parameters:
     ///   - viewModel: The view model to use (defaults to new instance)
     ///   - onMealSaved: Optional callback to execute when a meal is saved
+    ///   - onCancel: Optional callback to execute when cancel is pressed
     init(viewModel: MealFormViewModel = MealFormViewModel(),
-         onMealSaved: (() -> Void)? = nil) {
+         onMealSaved: (() -> Void)? = nil,
+         onCancel: (() -> Void)? = nil) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.onMealSaved = onMealSaved
+        self.onCancel = onCancel
     }
     
     var body: some View {
@@ -92,6 +96,8 @@ struct MealFormView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
+                        viewModel.clearForm()
+                        onCancel?()
                         dismiss()
                     }
                 }

@@ -14,8 +14,11 @@ struct ContentView: View {
     @ObservedObject var mealListViewModel: MealListViewModel
     @ObservedObject var weeklyPlannerViewModel: WeeklyPlannerViewModel
     
+    // Tab selection state
+    @State private var selectedTab = 0
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             // Meal List Tab
             MealListView(
                 viewModel: mealListViewModel,
@@ -24,22 +27,31 @@ struct ContentView: View {
                 .tabItem {
                     Label("Meals", systemImage: "list.bullet")
                 }
+                .tag(0)
             
             // Add Meal Tab
-            MealFormView(onMealSaved: {
-                // Reload meals when a new meal is saved
-                mealListViewModel.loadMeals()
-                weeklyPlannerViewModel.loadWeek()
-            })
+            MealFormView(
+                onMealSaved: {
+                    // Reload meals when a new meal is saved
+                    mealListViewModel.loadMeals()
+                    weeklyPlannerViewModel.loadWeek()
+                },
+                onCancel: {
+                    // Switch to Meals tab when cancel is pressed
+                    selectedTab = 0
+                }
+            )
                 .tabItem {
                     Label("Add Meal", systemImage: "plus.circle")
                 }
+                .tag(1)
             
             // Weekly Planner Tab
             WeeklyPlannerView(viewModel: weeklyPlannerViewModel)
                 .tabItem {
                     Label("Planner", systemImage: "calendar")
                 }
+                .tag(2)
         }
     }
 }
