@@ -103,20 +103,25 @@ class MealFormViewModel: ObservableObject {
     func saveMeal() {
         errorMessage = nil
         
-        // Validate description is not empty (Requirement 1.4)
+        // Trim all fields to remove leading/trailing whitespace
         let trimmedDescription = description.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedProtein = primaryProtein.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedCarb = primaryCarb.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedComponents = otherComponents.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        
+        // Validate description is not empty (Requirement 1.4)
         guard !trimmedDescription.isEmpty else {
             errorMessage = "Please enter a meal description to continue."
             return
         }
         
-        // Create or update meal with current form data (Requirements 1.1, 1.2)
+        // Create or update meal with trimmed data (Requirements 1.1, 1.2)
         let meal = Meal(
             id: editingMeal?.id ?? UUID(),
             description: trimmedDescription,
-            primaryProtein: primaryProtein,
-            primaryCarb: primaryCarb,
-            otherComponents: otherComponents,
+            primaryProtein: trimmedProtein,
+            primaryCarb: trimmedCarb,
+            otherComponents: trimmedComponents,
             createdAt: editingMeal?.createdAt ?? Date()
         )
         

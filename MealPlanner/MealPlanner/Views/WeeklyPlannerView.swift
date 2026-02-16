@@ -61,6 +61,9 @@ struct WeeklyPlannerView: View {
                 }
             }
             .navigationTitle("Weekly Planner")
+            .onAppear {
+                viewModel.resetToCurrentWeek()
+            }
             .sheet(isPresented: $showingMealSelector) {
                 if let date = selectedDate {
                     MealSelectorView(

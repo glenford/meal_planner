@@ -156,6 +156,17 @@ class WeeklyPlannerViewModel: ObservableObject {
         lastFailedOperation?()
     }
     
+    /// Reset to the current week (starting from today)
+    /// Call this when the view appears to ensure we're showing the current week
+    func resetToCurrentWeek() {
+        let today = Date().startOfDay
+        // Only reset if we're not already showing the current week
+        if !weekDays.contains(where: { $0.startOfDay == today }) {
+            currentWeekStart = today
+            loadWeek()
+        }
+    }
+    
     /// Get all meals assigned to a specific day
     /// - Parameter date: The date to get meals for
     /// - Returns: An array of meals assigned to that date
